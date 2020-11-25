@@ -1,0 +1,35 @@
+DROP TABLE IF EXISTS Game;
+GO
+
+DROP TABLE IF EXISTS Member;
+GO
+
+CREATE TABLE Member
+(
+    MemberId INTEGER IDENTITY(1, 1),
+    [Name] NVARCHAR(50) NOT NULL,
+    Email NVARCHAR(100),
+    [Password] NVARCHAR(50) NOT NULL,
+    Pending BIT NOT NULL,
+    CONSTRAINT PK_Member PRIMARY KEY(MemberId)
+);
+GO
+
+
+CREATE TABLE Game
+(
+    GameNumber INTEGER IDENTITY(1, 1),
+    GameDate DATETIME NOT NULL,
+    [Name] NVARCHAR(50) NOT NULL,
+    Payee NVARCHAR(50),
+    AmountPaid FLOAT,
+    Venue NVARCHAR(50) NOT NULL,
+    MemberId INTEGER NOT NULL,
+    CONSTRAINT PK_Game PRIMARY KEY (GameNumber),
+    CONSTRAINT FK_Member_Game FOREIGN KEY (MemberId) REFERENCES Member (MemberId)
+)
+GO
+
+
+SELECT * FROM Member
+SELECT * FROM Game
