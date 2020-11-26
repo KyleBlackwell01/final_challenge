@@ -10,8 +10,8 @@ import { Member } from '../models/member';
 })
 export class DataService {
 
-  apiURL = "http://localhost:5000/api"
-  // apiURL = "http://basketballapi-env.eba-kmec3ywv.us-east-1.elasticbeanstalk.com/api"
+  // apiURL = "http://localhost:5000/api"
+  apiURL = "http://basketballapi-env.eba-kmec3ywv.us-east-1.elasticbeanstalk.com/api"
   member: BehaviorSubject<Member>;
   isAdmin: BehaviorSubject<boolean>;
   loggedIn: BehaviorSubject<boolean>;
