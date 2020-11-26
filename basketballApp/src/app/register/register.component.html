@@ -1,1 +1,11 @@
-<p>register works!</p>
+<h1>Register Member</h1>
+<div class="container">
+    <form class="inputs" #registerForm="ngForm" (ngSubmit)="register(registerForm.form);">
+        <input type="text" id="name" placeholder="Name" name="name" ngModel #nameField="ngModel" required>
+        <input type="text" id="email" placeholder="E-mail" name="email" ngModel #emailField="ngModel" required>
+        <input type="password" id="password" placeholder="Password" name="password" ngModel #passwordField="ngModel"
+            required>
+        <button type="submit" class="submit-button" [disabled]="!registerForm.valid"
+            [ngClass]="{'disabled-btn': !registerForm.valid}">Register</button>
+    </form>
+</div>

@@ -1,10 +1,11 @@
 <h1>Basketball Game System</h1>
 <div>
-  <button routerLink="login">Login</button>
-  <button routerLink="register">Register</button>
-  <button routerLink="create-game">Create Game</button>
-  <button routerLink="future-games">Future Games</button>
-  <button routerLink="past-games">Past games</button>
+  <button *ngIf="!this.loggedIn" routerLink="login">Login</button>
+  <button *ngIf="!this.loggedIn" routerLink="register">Register</button>
+  <button *ngIf="this.isAdmin && this.loggedIn" routerLink="create-game">Create Game</button>
+  <button *ngIf="this.loggedIn" routerLink="future-games">Future Games</button>
+  <button *ngIf="this.loggedIn" routerLink="past-games">Past games</button>
+  <button *ngIf="this.loggedIn" (click)="logout();" routerLink="">Logout</button>
 </div>
 
 <div>

@@ -1,1 +1,13 @@
-<p>login works!</p>
+<h1>Member Login</h1>
+<div class="container">
+    <form class="inputs" #loginForm="ngForm" (ngSubmit)="login(loginForm.form);">
+        <input type="text" id="email" placeholder="E-mail" name="email" ngModel #emailField="ngModel" required>
+        <input type="password" id="password" placeholder="Password" name="password" ngModel #passwordField="ngModel"
+            required>
+        <div class="error">
+            <p *ngIf="this.err">{{err}}</p>
+        </div>
+        <button type="submit" class="submit-button" [disabled]="!loginForm.valid"
+            [ngClass]="{'disabled-btn': !loginForm.valid}">Login</button>
+    </form>
+</div>

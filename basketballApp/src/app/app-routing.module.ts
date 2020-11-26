@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 import { CreategameComponent } from './creategame/creategame.component';
 import { GamesComponent } from './games/games.component';
 import { LoginComponent } from './login/login.component';
 import { PastgamesComponent } from './pastgames/pastgames.component';
 import { RegisterComponent } from './register/register.component';
+import { DataService } from './services/data.service';
 
 const routes: Routes = [
   {
@@ -19,17 +21,27 @@ const routes: Routes = [
   {
     path: 'create-game',
     component: CreategameComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+      data: {
+        expectedRole: true
+      }
   },
   {
     path: 'future-games',
     component: GamesComponent,
-    canActivate: [AuthGuard]
+    canActivate: [LoginGuard],
+      data: {
+        loggedIn: true
+      }
   },
   {
     path: 'past-games',
     component: PastgamesComponent,
-    canActivate: [AuthGuard]
+    canActivate: [LoginGuard],
+      data: {
+        loggedIn: true
+      }
+
   }
 ];
 

@@ -1,1 +1,28 @@
-<p>pastgames works!</p>
+<h1>Past Games</h1>
+
+<div *ngFor="let game of games" class="games-list">
+    <div><strong>Game No: </strong>{{game.gameNumber}}</div>
+    <div><strong>Name: </strong>{{game.name}}</div>
+    <div><strong>Date: </strong>{{game.gameDate | date: "d-MMM-yyyy, h:mm a"}}</div>
+    <div><strong>Venue: </strong>{{game.venue}}</div>
+    <div *ngIf="game.payee"><strong>Payee: </strong>{{game.payee}}</div>
+    <div *ngIf="game.amountPaid"><strong>Cost: </strong>{{game.amountPaid}}</div>
+</div>
+<h2>Update Game</h2>
+<div class="container">
+    <form class="inputs" #gameForm="ngForm" (ngSubmit)="updateGame(gameForm.form);">
+
+        <input type="number" id="gameNumber" placeholder="Game Number" name="gameNumber" ngModel #gameNumberField="ngModel" required>
+        
+        <select placeholder="Game Number" class="form-control" name="payee" ngModel #payeeField="ngModel" required>
+            <option *ngFor="let member of members" [value]="member">
+                {{ member }}
+            </option>
+        </select>
+
+        <input type="number" id="amountPaid" placeholder="Total Cost" name="amountPaid" ngModel #amountPaidField="ngModel" required>
+
+        <button type="submit" class="submit-button" [disabled]="!gameForm.valid"
+            [ngClass]="{'disabled-btn': !gameForm.valid}">Update Game</button>
+    </form>
+</div>
