@@ -34,8 +34,11 @@ export class LoginComponent implements OnInit {
     }).finally(() => {
       console.log("Login Finalized");
 
-      if(this.dataService.member.value.memberId = 1){
+      if(this.dataService.member.value.memberId == 1){
         this.dataService.isAdmin.next(true);
+      }
+      else{
+        this.dataService.isAdmin.next(false);
       }
     });
   }

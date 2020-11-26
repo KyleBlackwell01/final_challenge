@@ -11,9 +11,11 @@ import { Member } from '../models/member';
 export class DataService {
 
   apiURL = "http://localhost:5000/api"
+  // apiURL = "http://basketballapi-env.eba-kmec3ywv.us-east-1.elasticbeanstalk.com/api"
   member: BehaviorSubject<Member>;
   isAdmin: BehaviorSubject<boolean>;
   loggedIn: BehaviorSubject<boolean>;
+  passMember: Member;
 
   constructor(private http: HttpClient) {
     this.member = new BehaviorSubject(null);
@@ -21,19 +23,6 @@ export class DataService {
     this.isAdmin = new BehaviorSubject(null);
     this.loggedIn = new BehaviorSubject(null);
 
-    // this.loggedIn.next(false);
-    // if(this.isloggedIn()) {
-    //   this.loggedIn.next(true);
-    //   if(localStorage.getItem('Auth') == "1"){
-    //     this.isAdmin.next(true);
-    //   }
-    //   else{
-    //     this.isAdmin.next(false);
-    //   }
-    // }
-    // else{
-    //   this.loggedIn.next(false);
-    // }
 
    }
 
@@ -54,6 +43,7 @@ export class DataService {
         err => {
           console.log(err);
           this.loggedIn.next(false);
+          this.isAdmin.next(false);
           reject(err);
         });
     });
@@ -61,6 +51,7 @@ export class DataService {
 
 
   register(member: Member) {
+    member.pending = false;
     return new Promise((resolve, reject) => {
       this.http.post(this.apiURL + "/members/registermember", member).subscribe(
         res => {
@@ -116,6 +107,7 @@ export class DataService {
     });
   }
 
+
   getPastGames() {
     return new Promise((resolve, reject) => {
       this.http.get<Games>(this.apiURL + "/members/getpastgames").subscribe(
@@ -160,6 +152,36 @@ export class DataService {
 
   isloggedIn(){
     return !this.member.value.memberId;
+  }
+
+  getPending() {
+    return new Promise((resolve, reject) => {
+      this.http.get<string[]>(this.apiURL + "/members/getpending").subscribe(
+        res => {
+          console.log(res);
+          resolve(res);
+        },
+        err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+
+  }
+
+  approveMember(passMember){
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiURL + "/members/updateMember", passMember).subscribe(
+        res => {
+          console.log(res);
+          resolve(res);
+        },
+        err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+
   }
 
 

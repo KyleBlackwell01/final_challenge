@@ -1,0 +1,6 @@
+<h1>Member List</h1>
+
+<div *ngFor="let game of games">
+    <div><strong>Name: </strong>{{game.payee}}</div>
+    <div><strong>Cost: </strong>${{game.amountPaid}}</div>
+</div>

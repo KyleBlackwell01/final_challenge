@@ -17,7 +17,7 @@ export class AuthGuard implements CanActivate {
       const testRole = this.data.isAdmin.value;
       // const test = this.data.loggedIn.value;
       // const test3 = route.data.test3;
-      // console.log(testRole);
+      console.log(testRole);
       // console.log(test3);
 
       if (testRole !== expectedRole) {

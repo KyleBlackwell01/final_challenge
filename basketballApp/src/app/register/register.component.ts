@@ -10,6 +10,8 @@ import { DataService } from '../services/data.service';
 })
 export class RegisterComponent implements OnInit {
 
+  success: boolean;
+
   constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class RegisterComponent implements OnInit {
       console.error("Registration Failed");
     }).finally(() => {
       console.log("Registration Finalized");
+      this.success = true;
     });
   }
 

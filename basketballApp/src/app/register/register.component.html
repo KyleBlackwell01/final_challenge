@@ -8,4 +8,6 @@
         <button type="submit" class="submit-button" [disabled]="!registerForm.valid"
             [ngClass]="{'disabled-btn': !registerForm.valid}">Register</button>
     </form>
+
+    <p *ngIf="this.success">Successfully registered.</p>
 </div>

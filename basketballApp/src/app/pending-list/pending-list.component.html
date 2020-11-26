@@ -1,0 +1,20 @@
+<h1>Pending Members List</h1>
+
+<div *ngFor="let member of members">
+    <div><strong>Name: </strong>{{member}}</div>
+</div>
+
+<div>
+    <form class="inputs" #memberForm="ngForm" (ngSubmit)="approveMember(memberForm.form);">
+        
+        <select placeholder="Game Number" class="form-control" name="payee" ngModel #payeeField="ngModel" required>
+            <option *ngFor="let member of members" [value]="member">
+                {{ member }}
+            </option>
+        </select>
+
+        <button type="submit" class="submit-button" [disabled]="!memberForm.valid"
+            [ngClass]="{'disabled-btn': !memberForm.valid}">Approve Member</button>
+    </form>
+
+</div>

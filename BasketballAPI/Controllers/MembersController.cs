@@ -20,7 +20,7 @@ namespace BasketballAPI.Controllers
             _context = context;
         }
 
-        //Member Login
+        //Member Login 
         [HttpPost, Route("memberlogin")]
         public async Task<IActionResult> Login(Login login)
         {
@@ -152,6 +152,7 @@ namespace BasketballAPI.Controllers
         {
             var members = await _context.Member.Where(m => m.Pending == false).Select(m => m.Name).ToListAsync();
 
+
             if (members != null)
             {
                 return Ok(members);
@@ -162,90 +163,39 @@ namespace BasketballAPI.Controllers
             }
         }
 
-/*         GET: api/Members
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Member>>> GetMember()
+        //Gets pending/unapproved members
+        [HttpGet, Route("getpending")]
+        public async Task<IActionResult> GetMembers()
         {
-            return await _context.Member.ToListAsync();
-        }
+            var members = await _context.Member.Where(m => m.Pending == true).Select(m => m.Name).ToListAsync();
 
-         GET: api/Members/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Member>> GetMember(int id)
-        {
-            var member = await _context.Member.FindAsync(id);
-
-            if (member == null)
+            if (members != null)
+            {
+                return Ok(members);
+            }
+            else
             {
                 return NotFound();
             }
 
-            return member;
         }
 
-         PUT: api/Members/5
-         To protect from overposting attacks, enable the specific properties you want to bind to, for
-         more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutMember(int id, Member member)
+        [HttpPut, Route("approveMember")]
+        public async Task<IActionResult> ApproveMember(Member member)
         {
-            if (id != member.MemberId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(member).State = EntityState.Modified;
-
             try
             {
+                _context.Member.Update(member);
                 await _context.SaveChangesAsync();
+                return Ok(member);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!MemberExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest(ex.Message);
             }
-
-            return NoContent();
         }
 
-         POST: api/Members
-         To protect from overposting attacks, enable the specific properties you want to bind to, for
-         more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Member>> PostMember(Member member)
-        {
-            _context.Member.Add(member);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMember", new { id = member.MemberId }, member);
-        }
 
-         DELETE: api/Members/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Member>> DeleteMember(int id)
-        {
-            var member = await _context.Member.FindAsync(id);
-            if (member == null)
-            {
-                return NotFound();
-            }
-
-            _context.Member.Remove(member);
-            await _context.SaveChangesAsync();
-
-            return member;
-        }
-
-        private bool MemberExists(int id)
-        {
-            return _context.Member.Any(e => e.MemberId == id);
-        }*/
     }
 }

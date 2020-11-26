@@ -5,6 +5,9 @@
   <button *ngIf="this.isAdmin && this.loggedIn" routerLink="create-game">Create Game</button>
   <button *ngIf="this.loggedIn" routerLink="future-games">Future Games</button>
   <button *ngIf="this.loggedIn" routerLink="past-games">Past games</button>
+  <button *ngIf="this.loggedIn" routerLink="memberlist">Memberlist</button>
+  <button *ngIf="this.loggedIn" routerLink="pendingList">Pending Members</button>
+
   <button *ngIf="this.loggedIn" (click)="logout();" routerLink="">Logout</button>
 </div>
 

@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { PastgamesComponent } from './pastgames/pastgames.component';
 import { RegisterComponent } from './register/register.component';
 import { DataService } from './services/data.service';
+import { MemberlistComponent } from './memberlist/memberlist.component';
+import { PendingListComponent } from './pending-list/pending-list.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,22 @@ const routes: Routes = [
         loggedIn: true
       }
 
+  },
+  {
+    path: 'memberlist',
+    component: MemberlistComponent,
+    canActivate: [LoginGuard],
+      data: {
+        loggedIn: true
+      }
+  },
+  {
+    path: 'pendingList',
+    component: PendingListComponent,
+    canActivate: [LoginGuard],
+      data: {
+        loggedIn: true
+      }
   }
 ];
 

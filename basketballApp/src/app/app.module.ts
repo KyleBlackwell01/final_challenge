@@ -10,6 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PastgamesComponent } from './pastgames/pastgames.component';
 import { CreategameComponent } from './creategame/creategame.component';
+import { MemberlistComponent } from './memberlist/memberlist.component';
+import { PendingListComponent } from './pending-list/pending-list.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { CreategameComponent } from './creategame/creategame.component';
     LoginComponent,
     RegisterComponent,
     PastgamesComponent,
-    CreategameComponent
+    CreategameComponent,
+    MemberlistComponent,
+    PendingListComponent,
   ],
   imports: [
     BrowserModule,
